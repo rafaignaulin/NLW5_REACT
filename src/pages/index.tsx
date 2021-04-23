@@ -2,7 +2,7 @@ import { GetStaticProps } from "next";
 import Image from 'next/image';
 import Link from 'next/link'
 import { format, parseISO } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import ptBR from 'date-fns/locale/pt-BR';
 import { api } from "../services/api";
 import convertDurationToTimeString from "../utils/convertDurationToTimeString";
 
@@ -13,11 +13,10 @@ type Episode = {
   title: string;
   members: string;
   thumbnail: string;
-  description: string;
   duration: number;
   durationAsString: string;
   url: string;
-  published_at: string;
+  publishedAt: string;
 }
 
 type HomeProps = {
@@ -26,7 +25,7 @@ type HomeProps = {
 }
 
 
-export default function Home({latestEpisodes, allEpisodes}) {
+export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
   return (
     <div className={styles.homePage}>
       <section className={styles.latestEpisodes}>
@@ -43,7 +42,7 @@ export default function Home({latestEpisodes, allEpisodes}) {
                   <a>{episode.title}</a>
                  </Link>
                   <p>{episode.members}</p>
-                  <span>{episode.published_at}</span>
+                  <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                </div>
                   <button type="button">
@@ -123,7 +122,6 @@ export const getStaticProps: GetStaticProps = async () => {
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', {locale: ptBR}),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
-      description: episode.description,
       url: episode.file.url,
     };
   })
