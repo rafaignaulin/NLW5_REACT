@@ -4,7 +4,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 import styles from './styles.module.scss';
 
 export default function Header() {
-  const currrentDate = format(new Date(), 'EEEEEE, d MMMM', {locale: ptBR})
+  const currentDate = format(new Date(), 'EEEEEE, d MMMM', {locale: ptBR})
 
   return (
     <header className={styles.headerContainer}>
@@ -12,7 +12,7 @@ export default function Header() {
     
       <p>O melhor para voce ouvir, sempre</p>
 
-      <span>{currrentDate}</span>
+      <span>{currentDate}</span>
     </header>
   );
 }
